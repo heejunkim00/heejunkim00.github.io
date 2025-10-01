@@ -27,7 +27,7 @@
 ### 추가한 부분
 
 # cover: # 원하는 배경 이미지 경로 
-prodution_url: 'https://heejunkim00.github.io'
+production_url: 'https://heejunkim00.github.io'
 
 disqus: True
 disqus_shortname: xxxxx
@@ -47,7 +47,7 @@ branch: master
 
 title: Heejun Kim
 email: ya2298yay@gmail.com
-author: GitHub User
+author: HeeJun Kim
 
 # Copyright setting
 # You can use any html code, currently below placeholders are available:
