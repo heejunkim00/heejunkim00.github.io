@@ -1,0 +1,257 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Medium Length Professional CV
+% LaTeX Template
+% Version 2.0 (8/5/13)
+%
+% This template has been downloaded from:
+% http://www.LaTeXTemplates.com
+%
+% Original author:
+% Trey Hunner (http://www.treyhunner.com/)
+%
+% Important note:
+% This template requires the resume.cls file to be in the same directory as the
+% .tex file. The resume.cls file provides the resume style used for structuring the
+% document.
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%----------------------------------------------------------------------------------------
+
+\documentclass{resume} % Use the custom resume.cls style
+\usepackage[dvipsnames]{xcolor}
+
+\usepackage[left=0.5in,top=0.5in,right=0.5in,bottom=0.5in]{geometry} % Document margins
+\newcommand{\tab}[1]{\hspace{.2667\textwidth}\rlap{#1}}
+\newcommand{\itab}[1]{\hspace{0em}\rlap{#1}}
+\name{Heejun Kim} % Your name
+%\address{556 North Shore Drive 1 \\ South Haven, MI 49090} % Your address
+%\address{123 Pleasant Lane \\ City, State 12345} % Your secondary addess (optional)
+% \address{github:  \\ blog: loisks.blogspot.com}
+
+\vspace{-1em} % 공백을 줄이기 위해 음수 값 사용
+
+\usepackage{fontawesome} % preamble에 추가
+
+\address{%
+  \faGlobe\ \href{https://heejunkim00.github.io/}{Homepage} \quad
+  \faEnvelope\ \href{mailto:ya2298yay@gmail.com}{Email} \quad
+  \faGithub\ \href{https://github.com/heejunkim00}{GitHub} \quad
+  \faGraduationCap\ \href{https://scholar.google.com/citations?user=8mr04CUAAAAJ&hl=ko}{Google Scholar}%
+}
+
+ % Your phone number and email
+
+ \usepackage{hyperref}  % 하이퍼링
+ \hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=cyan,
+    pdftitle={Overleaf Example},
+    pdfpagemode=FullScreen,
+}
+
+
+\renewenvironment{rSection}[1]{
+\vspace{-0.5 em} %
+\sectionskip
+\textcolor{RoyalPurple}{\MakeUppercase{#1}}
+\sectionlineskip
+\hrule
+\begin{list}{}{
+\setlength{\leftmargin}{1.5em}
+}
+\item[]
+}{
+\end{list}
+}
+\usepackage{textcomp}
+
+
+\begin{document}
+
+%----------------------------------------------------------------------------------------
+%	EDUCATION SECTION
+%----------------------------------------------------------------------------------------
+
+\begin{rSection}{Education}
+
+
+{\bf Gwangju Institute of Science and Technology (GIST)} \hfill {\em February 2020 - present}{}
+\\ B.S Major: Electrical Engineering and Computer Science, GPA 4.18/4.50 \hfill
+\\ Minor: AI, Mathematics
+\\ Location: Gwangju, South Korea  \hfill
+\\ Senior year of college \hfill
+
+{\bf University of California, Berkeley (UC Berkeley)} \hfill {\em June 2024 - August 2024} 
+\\ Summer Session, GPA 4.0/4.0 \hfill
+\\ Coursework: Introduction to Artificial Intelligence, Principles \& Techniques of Data Science \hfill
+
+%Minor in Linguistics \smallskip \\
+%Member of Eta Kappa Nu \\
+%Member of Upsilon Pi Epsilon \\
+\end{rSection}
+
+%----------------------------------------------------------------------------------------
+%	Research Experiments
+%----------------------------------------------------------------------------------------
+\vspace{+0.5 em} % 줄 띄우기 
+\begin{rSection}{Research Experiments}
+
+
+\begin{rSubsection}{Data Science Lab}{\em Feb 2025 - present, January 2024 - June 2024}{Research Assistant}{Gwangju, South Korea}
+\vspace{-0.3 em}
+\item Supervised by \href{https://sundong.kim/}{Prof. Sundong Kim} 
+\item Developed an architecture that applies generative models to reinforcement learning, combining existing problem-solving approaches to devise new methodologies for solving the Abstract Reasoning Corpus (ARC).
+\item Researched test-time adaptation with reinforcement learning for self-improving reasoning capabilities of large language model
+
+\end{rSubsection}
+
+%------------------------------------------------
+
+\vspace{-0.75 em}
+
+\begin{rSubsection}{Forschungszentrum Jülich}{\em September 2024 - February 2025}{Korea-Germany Junior Research Fellowship Program 2024}{Jülich, Germany}
+\vspace{-0.3 em}
+\item Host Institute: INM-7 directed by \href{https://scholar.google.com/citations?user=wjpISMAAAAAJ&hl=de}{Prof. Simon B. Eickhoff
+} and contributed to Mathematical Neuroscience Group led by \href{https://www.researchgate.net/scientific-contributions/Oleksandr-V-Popovych-39245813}{Dr. Oleksandr Popovych}.
+\item Researched about MRI processing on disease classification and prediction by machine learning
+\item Developed a preprocessing pipeline to generate highly refined multi-modal MRI human connectome data from large-scale Parkinson’s patient data (PPMI) using High-Performance Computing (HPC) and Hyper-Threading technology. (Project Supervisor: \href{https://www.researchgate.net/profile/Kyesam-Jung}{Dr. KyeSam Jung})
+\item Fund: 12,000,000KRW (8,197EUR) by National Research Foundation of Korea (NRF)(No. RS-2023-00254343).
+\end{rSubsection}
+%------------------------------------------------
+
+
+\end{rSection}
+
+%----------------------------------------------------------------------------------------
+%	Publications
+%----------------------------------------------------------------------------------------
+\begin{rSection}{Publications}
+
+Diffusion-Based Offline RL for Improved Decision-Making in Augmented ARC Task \\
+Yunho Kim, Jaehyun Park, \underline{Heejun Kim}, Sejin Kim, Byung-Jun Lee, Sundong Kim \\
+{\em arXiv:2410.11324}
+
+\end{rSection}
+
+
+%----------------------------------------------------------------------------------------
+%	Projects
+%----------------------------------------------------------------------------------------
+
+\begin{rSection}{Projects}
+
+
+%------------------------------------------------
+% \vspace{-0.75 em}
+
+\begin{rSubsection}{Skill-based Reinforcement Learning with UCB Skill Selection}{\em May 2025 - June 2025}{}{}
+\vspace{-0.3 em}
+\item Reproduced BeCL framework for unsupervised skill discovery in reinforcement learning environments 
+\item Developed Multi-Armed Bandit approach with UCB algorithm to improve downstream task adaptation efficiency. \href{https://drive.google.com/file/d/1tRJc8U8pL4we5HEK8mFFzZmEvHAaQNKb/view?usp=sharing}{[Report]} \href{https://drive.google.com/file/d/1ftnfeFjGkvR5KkunbfXWZwIEhw3YWPVk/view?usp=sharing}{[Poster]}
+\end{rSubsection}
+
+
+\begin{rSubsection}{Jeju Special Product Price Prediction AI Competition}{\em November 2023 - December 2023}{}{}
+\vspace{-0.3 em}
+\item Predicted price for Locally Produced Goods in Jeju using machine learning
+\end{rSubsection}
+
+%------------------------------------------------
+\vspace{-0.75 em}
+\begin{rSubsection}{Hyundai AI Challenge}{\em September 2023 - October 2023}{}{}
+\vspace{-0.3 em}
+\item Processed large-scale port logistics datasets (cleaning, feature extraction, temporal aggregation).
+\item Built tree-based boosting models to predict ship waiting times.
+\item Ranked Top 25/330 teams among 1,300+ participants.
+
+\end{rSubsection}
+
+\end{rSection}
+
+%----------------------------------------------------------------------------------------
+%	Leadership
+%----------------------------------------------------------------------------------------
+\begin{rSection}{Leaderships}
+
+\begin{rSubsection}{Teaching Assistant}{\em Fall 2025}{}{}
+\vspace{-0.3 em}
+\item Machine Learning \& Deep Learning (AI5213/EC4213): led TA sessions, held office hours, and managed assignments/exams. \href{https://sundong.kim/courses/mldl25f/}{[Homepage]}
+\end{rSubsection}
+
+\vspace{-0.75 em}
+
+\begin{rSubsection}{Korea Army Instructor}{\em February 2021 - August 2022}{}{}
+\vspace{-0.3 em}
+\item Served as an Army instructor in the 50th Division in Daegu, South Korea
+\item Conducted basic training for approximately 2000 military personnel 
+\end{rSubsection}
+
+\end{rSection}
+
+
+
+%----------------------------------------------------------------------------------------
+%	Extra Activities
+%----------------------------------------------------------------------------------------
+
+\begin{rSection}{Extra Activities}
+
+\begin{rSubsection}{Google Developer Student Club}{\em September 2023 - February 2024}{}{}
+\vspace{-0.3 em}
+\item Participated in an AI study focused on machine learning and deep learning
+\item Studied models in ML/DL and analysis of top team models in Kaggle AI competitions
+\item Established study directions and organized study materials as a team leader 
+\end{rSubsection}
+
+%------------------------------------------------
+\vspace{-0.75 em}
+\begin{rSubsection}{Financial Investment Conference}{\em March 2023 - March 2024}{}{}
+\vspace{-0.3 em}
+\item Conducted a study on economics
+\item Analyzed and presented economic markets on a weekly basis
+\end{rSubsection}
+
+%------------------------------------------------
+\vspace{-0.75 em}
+\begin{rSubsection}{GIST Club Federation}{\em February 2020 - December 2020}{}{}
+\vspace{-0.3 em}
+\item Managed clubs in Gwangju Institute of Science and Technology
+\end{rSubsection}
+
+\end{rSection}
+
+%----------------------------------------------------------------------------------------
+%	Skills
+%----------------------------------------------------------------------------------------
+\vspace{+0.5 em} %
+\begin{rSection}{Skills }
+
+\begin{tabular}{ @{} >{\bfseries}l @{\hspace{6ex}} l }
+Programming Languages &  Python, C/C++ \\
+Python Packages \& Framework & PyTorch, VeRL, Scikit-learn, Pandas, Numpy, Matplotlib, Ray  \\
+Operating System & Linux, Windows, MacOS \\
+Others & Docker, Wandb, SLURM, HTCondor, SQLite
+\end{tabular}
+
+\end{rSection}
+
+%----------------------------------------------------------------------------------------
+%	Honors
+%----------------------------------------------------------------------------------------
+\begin{rSection}{Honors} \itemsep -2pt
+{\bf Government Scholarship, Gwangju Institute of Science and Technology }\hfill {\em 2020 - present}\\
+{\bf Government Scholarship, STEM scholarship}\hfill {\em 2020 - present} \\
+{\bf Dean's List, College of Information and Computing, GIST}\hfill {\em Spring 2025} \\ 
+{\bf GIST International Internship Support Program}\hfill {\em September 2024 - February 2025} \\
+{\bf Korea-Germany Junior Research Fellowship Program 2024}\hfill {\em September 2024 - February 2025} \\
+{$\cdot$}{\leftmargin=0em} Organized by the Max Planck POSTECH/KOREA Research (MPK) \\
+
+
+\end{rSection}
+
+\end{document}
