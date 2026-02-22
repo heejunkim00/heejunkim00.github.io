@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2025) (preloaded format=pdflatex 2025.11.27)  22 FEB 2026 14:56
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2025) (preloaded format=pdflatex 2025.11.27)  22 FEB 2026 15:08
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -346,13 +346,13 @@ Overfull \hbox (30.0pt too wide) in paragraph at lines 74--74
  []
 
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <10.95> on input line 107.
+(Font)              <10.95> on input line 105.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <8> on input line 107.
+(Font)              <8> on input line 105.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <6> on input line 107.
+(Font)              <6> on input line 105.
 
-Overfull \hbox (8.99147pt too wide) in paragraph at lines 131--132
+Overfull \hbox (8.99147pt too wide) in paragraph at lines 129--130
 []\OT1/cmr/m/n/10.95 Fund: 12,000,000KRW (8,197EUR) by Na-tional Re-search Foun
 -da-tion of Ko-rea (NRF)(No. RS-2023-00254343). 
  []
@@ -365,7 +365,7 @@ Overfull \hbox (8.99147pt too wide) in paragraph at lines 131--132
 r/local/texlive/2025basic/texmf-dist/fonts/enc/dvips/fontawesome/fontawesometwo
 .enc}{/usr/local/texlive/2025basic/texmf-dist/fonts/enc/dvips/fontawesome/fonta
 wesomeone.enc}]
-Underfull \hbox (badness 10000) in paragraph at lines 256--262
+Underfull \hbox (badness 10000) in paragraph at lines 254--260
 
  []
 
@@ -386,7 +386,7 @@ Here is how much of TeX's memory you used:
  33829 multiletter control sequences out of 15000+600000
  563468 words of font info for 51 fonts, out of 8000000 for 9000
  319 hyphenation exceptions out of 8191
- 72i,6n,79p,607b,513s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 72i,6n,79p,607b,497s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/fontawesome/FontA
 wesome.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsfonts
 /cm/cmbx10.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/amsf
@@ -394,7 +394,7 @@ onts/cm/cmbx12.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/public/
 amsfonts/cm/cmr10.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/publ
 ic/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2025basic/texmf-dist/fonts/type1/
 public/amsfonts/cm/cmti10.pfb>
-Output written on cv_4.pdf (2 pages, 102457 bytes).
+Output written on cv_4.pdf (2 pages, 102433 bytes).
 PDF statistics:
  65 PDF objects out of 1000 (max. 8388607)
  47 compressed objects within 1 object stream
