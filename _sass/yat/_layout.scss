@@ -50,10 +50,6 @@ html {
       top: -$header-height;
     }
 
-    .framework .sidebar {
-      top: 20px;
-      right: 20px;
-    }
   }
 }
 
@@ -695,14 +691,14 @@ html {
   .main {
     @extend %flex-1;
     min-width: 0;
+    padding-right: 170px;
   }
 
   .sidebar {
     position: fixed;
-    top: $header-height + 20px;
-    right: 20px;
+    top: 80px;
+    right: 150px;
     padding-left: 0;
-    transition: top 0.2s;
 
     @include media-query($on-laptop) {
       display: none;
