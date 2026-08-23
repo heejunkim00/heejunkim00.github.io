@@ -691,13 +691,13 @@ html {
   .main {
     @extend %flex-1;
     min-width: 0;
-    padding-right: 170px;
+    padding-right: 110px;
   }
 
   .sidebar {
     position: fixed;
     top: 80px;
-    right: 150px;
+    right: 130px;
     padding-left: 0;
 
     @include media-query($on-laptop) {
