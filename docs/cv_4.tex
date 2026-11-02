@@ -1,0 +1,309 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Medium Length Professional CV
+% LaTeX Template
+% Version 2.0 (8/5/13)
+%
+% This template has been downloaded from:
+% http://www.LaTeXTemplates.com
+%
+% Original author:
+% Trey Hunner (http://www.treyhunner.com/)
+%
+% Important note:
+% This template requires the resume.cls file to be in the same directory as the
+% .tex file. The resume.cls file provides the resume style used for structuring the
+% document.
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%----------------------------------------------------------------------------------------
+
+\documentclass{resume} % Use the custom resume.cls style
+\usepackage[dvipsnames]{xcolor}
+
+\usepackage[left=0.4in,top=0.5in,right=0.4in,bottom=0.5in]{geometry} % Document margins
+\newcommand{\tab}[1]{\hspace{.2667\textwidth}\rlap{#1}}
+\newcommand{\itab}[1]{\hspace{0em}\rlap{#1}}
+\name{Heejun Kim} % Your name
+%\address{556 North Shore Drive 1 \\ South Haven, MI 49090} % Your address
+%\address{123 Pleasant Lane \\ City, State 12345} % Your secondary addess (optional)
+% \address{github:  \\ blog: loisks.blogspot.com}
+
+\vspace{-1em} % 공백을 줄이기 위해 음수 값 사용
+
+\usepackage{fontawesome} % preamble에 추가
+
+\address{%
+  \faGlobe\ \href{https://heejunkim00.github.io/}{Homepage} \quad
+  \faEnvelope\ \href{mailto:ya2298yay@gmail.com}{Email} \quad
+  \faGraduationCap\ \href{https://scholar.google.com/citations?user=8mr04CUAAAAJ&hl=ko}{Google Scholar} \quad
+  \faLinkedin\ \href{https://www.linkedin.com/in/heejun-kim-a8410b277}{LinkedIn} \quad
+  \faGithub\ \href{https://github.com/heejunkim00}{GitHub}%
+}
+
+ % Your phone number and email
+
+ \usepackage{hyperref}  % 하이퍼링
+ \hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=cyan,
+    pdftitle={Heejun Kim --- Curriculum Vitae},
+    pdfauthor={Heejun Kim},
+}
+
+
+% Optional first argument: small note typeset at the right end of the heading line
+\renewenvironment{rSection}[2][]{
+\vspace{-0.5 em} %
+\sectionskip
+\noindent\textcolor{RoyalPurple}{\MakeUppercase{#2}}\hfill{\footnotesize #1}\par
+\sectionlineskip
+\hrule
+\begin{list}{}{
+\setlength{\leftmargin}{1.5em}
+}
+\item[]
+}{
+\end{list}
+}
+\usepackage{textcomp}
+
+
+\begin{document}
+
+%----------------------------------------------------------------------------------------
+%	EDUCATION SECTION
+%----------------------------------------------------------------------------------------
+
+\begin{rSection}{Education}
+
+
+{\bf Korea Advanced Institute of Science and Technology (KAIST)} \hfill {\em September 2026 - present}{}
+\\ M.S. in Artificial Intelligence \hfill
+
+{\bf Gwangju Institute of Science and Technology (GIST)} \hfill {\em February 2020 - August 2026}{}
+\\ B.S. in Electrical Engineering and Computer Science \hfill {\small\em Military service leave (2 years)}
+\\ GPA: 4.2/4.5 (magna cum laude) \hfill
+
+{\bf University of California, Berkeley (UC Berkeley)} \hfill {\em June 2024 - August 2024}
+\\ Summer Session, GPA 4.0/4.0 \hfill
+
+%Minor in Linguistics \small skip \\
+%Member of Eta Kappa Nu \\
+%Member of Upsilon Pi Epsilon \\
+\end{rSection}
+
+%----------------------------------------------------------------------------------------
+%	Research Experiments
+%----------------------------------------------------------------------------------------
+\vspace{+0.5 em} % 줄 띄우기
+\begin{rSection}{Research Experience}
+
+
+\begin{rSubsection}{Scalable and Efficient AI Lab}{\em September 2026 - present}{Korea Advanced Institute of Science and Technology, Advisor: \href{https://sehoonkim.org/}{Prof. Sehoon Kim}}{Seoul, South Korea}
+\vspace{-0.3 em}
+\item Improving reasoning capabilities and accelerating inference in recursive architectures
+
+\end{rSubsection}
+
+\vspace{-0.75 em}
+
+\begin{rSubsection}{Learning and Adaptation Algorithm Lab}{\em January 2026 - August 2026}{Seoul National University, Advisor: \href{https://www.snu-laal.com/}{Prof. Taesup Kim}}{Seoul, South Korea}
+\vspace{-0.3 em}
+\item Conducting research on Agentic Memory Using LLM Uncertainty Estimation
+\item Studied internal behavioral mechanisms of LLMs underlying reasoning, hallucination, and memory recall
+
+\end{rSubsection}
+
+\vspace{-0.75 em}
+
+\begin{rSubsection}{Data Science Lab}{\em Feb 2025 - August 2026, January 2024 - June 2024}{Gwangju Institute of Science and Technology, Advisor: \href{https://sundong.kim/}{Prof. Sundong Kim}}{Gwangju, South Korea}
+\vspace{-0.3 em}
+\item Researched test-time adaptation with reinforcement learning for self-improving reasoning capabilities of large language models on the Abstraction and Reasoning Corpus (ARC)
+\item Investigated metacognition-driven strategies for helping large language models escape local minima in reasoning
+
+\end{rSubsection}
+
+%------------------------------------------------
+
+\vspace{-0.75 em}
+
+\begin{rSubsection}{Forschungszentrum Jülich}{\em September 2024 - February 2025}{Korea-Germany Junior Research Fellowship Program 2024}{Jülich, Germany}
+\vspace{-0.3 em}
+\item Host Institute: INM-7 directed by \href{https://scholar.google.com/citations?user=wjpISMAAAAAJ&hl=de}{\emph{Prof. Simon B. Eickhoff}} and contributed to Mathematical Neuroscience Group led by \href{https://www.researchgate.net/scientific-contributions/Oleksandr-V-Popovych-39245813}{\emph{Dr. Oleksandr Popovych}}.
+\item Developed preprocessing pipeline for multi-modal MRI human connectome data using HPC and HyperThreading (Project Supervisor: \href{https://www.researchgate.net/profile/Kyesam-Jung}{\emph{Dr. Kyesam Jung}})
+\end{rSubsection}
+%------------------------------------------------
+
+
+\end{rSection}
+
+%----------------------------------------------------------------------------------------
+%	Publications
+%----------------------------------------------------------------------------------------
+\begin{rSection}[$^{*}$Equal contribution. $^{\dagger}$Corresponding author.]{Publications}
+
+\textbf{ResidualQuant: KV Cache Quantization for Looped Transformers with 2-Bit Residuals} \\
+{\small \underline{Heejun Kim}, Junyoung Lee, SangLyul Cho, Dongsu Han, Insu Han, Sehoon Kim} \\
+{\small \em Under review.} \href{https://arxiv.org/abs/2610.10381}{\small [Paper]} \href{https://seal-kaist.github.io/projects/ResidualQuant}{\small [Project page]}
+
+\vspace{0.1em}
+
+\textbf{From Noise to Diversity: Random Embedding Injection in LLM Reasoning} \\
+{\small \underline{Heejun Kim}$^{*}$, Seungpil Lee$^{*}$, Jewon Yeom, Jaewon Sok, Seonghyeon Park, Jeongjae Park, Taesup Kim$^{\dagger}$, Sundong Kim$^{\dagger}$} \\
+{\small \em NeurIPS 2026, \em ICML 2026 Mechanistic Interpretability Workshop (Spotlight, 2.8\% acceptance rate).} \href{https://arxiv.org/abs/2605.11936}{\small [Paper]} \href{https://heejunkim00.github.io/projects/RSP/}{\small [Project page]}
+
+\vspace{0.1em}
+
+\textbf{Hallucination as Commitment Failure: Larger LLMs Misfire Despite Knowing the Answer} \\
+{\small Jewon Yeom, Jaewon Sok, \underline{Heejun Kim}, Seonghyeon Park, Jeongjae Park, Taesup Kim} \\
+{\small \em NeurIPS 2026, \em ICML 2026 Mechanistic Interpretability Workshop.} \href{https://arxiv.org/abs/2605.22007}{\small [Paper]}
+
+\vspace{0.1em}
+
+\textbf{On the Role of Proposal Support in Diffusion-Based Offline RL for Sequential Decision-Making} \\
+{\small Yunho Kim, Jaehyun Park, \underline{Heejun Kim}, Sejin Kim, Byung-Jun Lee, Sundong Kim} \\
+{\small \em ICML 2026 DEMO Workshop.} \href{https://openreview.net/forum?id=roLdW7qeCO}{\small [Paper]}
+
+
+% \vspace{0.1em}
+%
+% \textbf{Disentangling Question, Response, and Verifier Languages in Multilingual LLM Evaluation} \\
+% {\small Jewon Yeom, Jaewon Sok, Seonghyeon Park, \underline{Heejun Kim}, Jeongjae Park, Taesup Kim} \\
+% {\small [Under Review]}
+%
+% \vspace{0.1em}
+%
+% \textbf{On the Tip of the Tongue: First-Token Cueing as a Behavioral Probe of Recall in LLMs} \\
+% {\small Jaewon Sok, Jewon Yeom, \underline{Heejun Kim}, Seonghyeon Park, Jeongjae Park, Taesup Kim} \\
+% {\small [Under Review]}
+%
+% \vspace{0.1em}
+%
+% \textbf{Efficient Epistemic Uncertainty Estimation for Large Language Models via Knowledge Distillation} \\
+% {\small Seonghyeon Park, Jewon Yeom, Jaewon Sok, Jeongjae Park, \underline{Heejun Kim}, Taesup Kim} \\
+% {\small [Under Review]} \href{https://arxiv.org/abs/2602.01956}{\small [Paper]}
+
+\end{rSection}
+
+
+%----------------------------------------------------------------------------------------
+%	Projects
+%----------------------------------------------------------------------------------------
+
+\newpage
+\begin{rSection}{Projects}
+
+
+%------------------------------------------------
+% \vspace{-0.75 em}
+
+\begin{rSubsection}{Skill-based Reinforcement Learning with UCB Skill Selection}{\em May 2025 - June 2025}{}{}
+\vspace{-0.3 em}
+\item Reproduced BeCL framework for unsupervised skill discovery in reinforcement learning environments 
+\item Developed Multi-Armed Bandit approach with UCB algorithm to improve downstream task adaptation efficiency. \href{https://drive.google.com/file/d/1ftnfeFjGkvR5KkunbfXWZwIEhw3YWPVk/view?usp=sharing}{[Poster]}
+\end{rSubsection}
+
+
+%------------------------------------------------
+\vspace{-0.75 em}
+\begin{rSubsection}{Hyundai AI Challenge}{\em September 2023 - October 2023}{}{}
+\vspace{-0.3 em}
+\item Processed large-scale port logistics datasets (cleaning, feature extraction, temporal aggregation).
+\item Built tree-based boosting models to predict ship waiting times.
+\item Ranked Top 25/330 teams among 1,300+ participants.
+
+\end{rSubsection}
+
+\end{rSection}
+
+%----------------------------------------------------------------------------------------
+%	Leadership
+%----------------------------------------------------------------------------------------
+\begin{rSection}{Leadership}
+
+\begin{rSubsection}{Teaching Assistant}{\em Fall 2025}{}{}
+\vspace{-0.3 em}
+\item Machine Learning \& Deep Learning (AI5213/EC4213): led TA sessions, held office hours, managed assignments/exams, and organized Kaggle competition. \href{https://sundong.kim/courses/mldl25f/}{[Homepage]}
+\end{rSubsection}
+
+\vspace{-0.75 em}
+
+\begin{rSubsection}{Korea Army Instructor}{\em February 2021 - August 2022}{}{}
+\vspace{-0.3 em}
+\item Served as an Army instructor in the 50th Division in Daegu, South Korea
+\item Conducted basic training for approximately 2000 military personnel 
+\end{rSubsection}
+
+\end{rSection}
+
+
+
+%----------------------------------------------------------------------------------------
+%	Extra Activities
+%----------------------------------------------------------------------------------------
+
+\begin{rSection}{Extra Activities}
+
+\begin{rSubsection}{Google Developer Student Club}{\em September 2023 - February 2024}{}{}
+\vspace{-0.3 em}
+\item Participated in an AI study focused on machine learning and deep learning
+\item Studied models in ML/DL and analysis of top team models in Kaggle AI competitions
+\item Established study directions and organized study materials as a team leader 
+\end{rSubsection}
+
+%------------------------------------------------
+\vspace{-0.75 em}
+\begin{rSubsection}{Financial Investment Conference}{\em March 2023 - March 2024}{}{}
+\vspace{-0.3 em}
+\item Conducted a study on economics
+\item Analyzed and presented economic markets on a weekly basis
+\end{rSubsection}
+
+%------------------------------------------------
+\vspace{-0.75 em}
+\begin{rSubsection}{GIST Club Federation}{\em February 2020 - December 2020}{}{}
+\vspace{-0.3 em}
+\item Managed clubs in Gwangju Institute of Science and Technology
+\end{rSubsection}
+
+\end{rSection}
+
+%----------------------------------------------------------------------------------------
+%	Skills
+%----------------------------------------------------------------------------------------
+\vspace{+0.5 em} %
+\begin{rSection}{Skills }
+
+\begin{tabular}{ @{} >{\bfseries}l @{\hspace{6ex}} l }
+Programming Languages &  Python, C/C++ \\
+Python Packages \& Framework & PyTorch, VeRL, Scikit-learn, Pandas, Numpy, Matplotlib, Ray  \\
+Operating System & Linux, Windows, MacOS \\
+Others & Docker, Wandb, SLURM, HTCondor, SQLite
+\end{tabular}
+
+\end{rSection}
+
+%----------------------------------------------------------------------------------------
+%	Honors
+%----------------------------------------------------------------------------------------
+\begin{rSection}{Honors} \itemsep -2pt
+{\bf Government Scholarship, Gwangju Institute of Science and Technology }\hfill {\em 2020 - August 2026}\\
+{\bf Government STEM Scholarship}\hfill {\em 2020 - August 2026} \\
+{\bf Dean's List, College of Information and Computing, GIST}\hfill {\em Spring 2025, Fall 2025} \\
+{\bf GIST International Internship Support Program}\hfill {\em September 2024 - February 2025} \\
+{\bf Korea-Germany Junior Research Fellowship Program 2024}\hfill {\em September 2024 - February 2025} \\
+{$\cdot$}{\leftmargin=0em} Organized by the Max Planck POSTECH/KOREA Research (MPK) \\
+{$\cdot$}{\leftmargin=0em} Fund: 12,000,000 KRW (8,197 EUR) by National Research Foundation of Korea (NRF), No. RS-2023-00254343. \\
+
+
+\end{rSection}
+
+\vfill
+\begin{center}{\footnotesize\color{gray} Last updated: November 2026}\end{center}
+
+\end{document}

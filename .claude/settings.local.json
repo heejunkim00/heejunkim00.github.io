@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(export:*)",
+      "Bash(bundle exec:*)",
+      "Bash(bundle install:*)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}

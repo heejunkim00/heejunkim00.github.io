@@ -1,0 +1,465 @@
+---
+layout: null
+permalink: /projects/RSP/
+---
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>From Noise to Diversity · Random Soft Prompts</title>
+  <meta name="description" content="Random Soft Prompts (RSP): training-free random embedding injection that makes LLM reasoning branch early, settle later, and widen Pass@N. NeurIPS 2026.">
+  <meta property="og:title" content="From Noise to Diversity: Random Embedding Injection in LLM Reasoning">
+  <meta property="og:description" content="Random Soft Prompts (RSP): training-free random embedding injection that widens Pass@N and improves rejection-sampling SFT. NeurIPS 2026.">
+  <meta property="og:image" content="https://heejunkim00.github.io/Image/projects/rsp/overview.png">
+  <meta property="og:type" content="article">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300..700&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" crossorigin="anonymous">
+  <style>
+    :root {
+      --bg: #fbfbf8;
+      --fg: #11110f;
+      --muted: #41413d;
+      --faint: #676761;
+      --line: #d8d8d2;
+      --card: #ffffff;
+      --accent: #d0642f;
+      --link: #245fc2;
+      --link-hover: #123f91;
+      --button: #202a37;
+      --button-hover: #111925;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; background: var(--bg); color-scheme: light; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--fg);
+      font-family: "Geist", system-ui, -apple-system, "Segoe UI", Arial, sans-serif;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: clip;
+    }
+    a { color: inherit; text-decoration: none; }
+    .shell { width: min(1180px, calc(100% - 48px)); margin-inline: auto; }
+
+    .link-arrow { display: inline-block; width: 1.35em; height: 1.35em; flex: 0 0 auto; overflow: visible;
+      stroke: currentColor; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; fill: none; }
+    .link-arrow-shaft { opacity: 0; transform: scaleX(0); transform-origin: 18px 12px;
+      transition: opacity 180ms ease, transform 240ms cubic-bezier(.22,1,.36,1); }
+    .link-arrow-head { transform: translateX(-3px); transition: transform 240ms cubic-bezier(.22,1,.36,1); }
+    a:hover .link-arrow-shaft { opacity: 1; transform: scaleX(1); }
+    a:hover .link-arrow-head { transform: translateX(0); }
+
+    .page > :not(.reveal):not(.site-footer) { animation: page-enter 820ms cubic-bezier(.22,1,.36,1) both; }
+    .page > .hero { animation-delay: 60ms; }
+    .page > .teaser { animation-delay: 110ms; }
+    @keyframes page-enter { from { opacity: 0; transform: translateY(26px); } to { opacity: 1; transform: none; } }
+
+    .top-nav { display: flex; justify-content: space-between; align-items: center; padding-top: 34px; }
+    .top-nav a { display: inline-flex; align-items: center; gap: 6px; color: #686862; font-size: 13px; transition: color 160ms ease; }
+    .top-nav a:hover { color: var(--fg); }
+    .top-nav .link-arrow { width: 17px; height: 17px; }
+
+    .hero { display: flex; flex-direction: column; align-items: center; text-align: center; padding: 68px 0 68px; }
+    .kicker { margin: 0 0 18px; color: #9e9e9e; font-size: 13px; font-weight: 560; letter-spacing: .1em; text-transform: uppercase; }
+    .hero h1 { max-width: 1080px; margin: 0 auto 24px; font-size: clamp(44px, 5.7vw, 74px); font-weight: 430;
+      letter-spacing: -.055em; line-height: .99; text-wrap: balance; }
+    .tagline { max-width: 850px; margin: 0; color: var(--muted); font-size: clamp(18px, 2vw, 23px); line-height: 1.5; text-wrap: balance; }
+    .tagline span { color: var(--accent); }
+
+    .authors { display: flex; flex-direction: column; margin-top: 38px; align-items: center; gap: 10px; color: var(--link); font-size: 15px; }
+    .authors .row { display: flex; justify-content: center; flex-wrap: wrap; gap: 8px 26px; }
+    .authors a, .authors span { color: inherit; transition: color 160ms ease; }
+    .authors a:hover { color: var(--link-hover); }
+    .authors sup, .affiliations sup { margin-left: 3px; color: #6f6f69; font-size: 9px; }
+    .affiliations { margin-top: 14px; color: #929292; font-size: 12px; line-height: 1.6; }
+    .affiliations p { margin: 0; }
+
+    .links { display: flex; margin-top: 34px; justify-content: center; flex-wrap: wrap; gap: 10px; }
+    .links a { display: inline-flex; min-width: 92px; height: 38px; padding: 0 15px; border: 1px solid var(--button); border-radius: 9px;
+      align-items: center; justify-content: center; gap: 9px; background: var(--button); box-shadow: 0 4px 10px rgb(15 25 40 / 16%);
+      color: #fff; font-size: 14px; font-weight: 560; transition: border-color 180ms ease, background 180ms ease, transform 180ms ease; }
+    .links a:hover { border-color: var(--button-hover); background: var(--button-hover); transform: translateY(-1px); }
+    .links a.ghost { background: transparent; color: var(--fg); border-color: #cfd2cb; box-shadow: none; }
+    .links a.ghost:hover { background: #f1f3ed; border-color: #b9bcb4; }
+    .links svg.icon { width: 15px; height: 15px; fill: currentColor; }
+
+    figure.fig { margin: 0 auto; }
+    figure.fig img { display: block; width: 100%; height: auto; border: 1px solid #d5d5cf; border-radius: 16px; background: #fff; }
+    figure.fig figcaption { max-width: 980px; margin: 14px auto 0; color: var(--faint); font-size: 12px; line-height: 1.55; text-align: center; }
+    .teaser { margin-bottom: 0; }
+    .mech-frame { border: 1px solid #d5d5cf; border-radius: 16px; background: #fff; padding: 18px 18px 12px; }
+    .mech-canvas svg { display: block; width: 100%; height: auto; }
+    .mech-controls { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin-top: 10px; padding-top: 12px; border-top: 1px solid #ecece7; }
+    .mech-controls button { height: 32px; padding: 0 13px; border: 1px solid #cfd2cb; border-radius: 8px; background: #fff; color: var(--fg);
+      font: inherit; font-size: 13px; font-weight: 560; cursor: pointer; transition: background 160ms ease, border-color 160ms ease; }
+    .mech-controls button:hover { background: #f1f3ed; border-color: #b9bcb4; }
+    .mech-controls .seg { display: inline-flex; border: 1px solid #cfd2cb; border-radius: 8px; overflow: hidden; }
+    .mech-controls .seg button { border: 0; border-radius: 0; }
+    .mech-controls .seg button + button { border-left: 1px solid #cfd2cb; }
+    .mech-controls .seg button.is-active { background: var(--button); color: #fff; }
+    .mech-canvas svg text { user-select: none; }
+    figure.fig figcaption a { color: var(--link); }
+
+    .summary { max-width: 990px; padding: 84px 0 72px; color: #171714; font-size: clamp(27px, 3.5vw, 45px); font-weight: 420;
+      letter-spacing: -.045em; line-height: 1.18; text-align: center; text-wrap: balance; }
+
+    .section { padding: 110px 0; border-top: 1px solid var(--line); }
+    .section h2 { max-width: 900px; margin: 0; font-size: clamp(32px, 4vw, 52px); font-weight: 430; letter-spacing: -.045em; line-height: 1.04; text-wrap: balance; }
+    .copy { max-width: 760px; margin-top: 26px; }
+    .copy p { margin: 0; color: var(--muted); font-size: 18px; line-height: 1.72; }
+    .copy p + p { margin-top: 22px; }
+    .copy strong { color: var(--fg); font-weight: 560; }
+    .copy code { font-family: "Geist Mono", ui-monospace, SFMono-Regular, Menlo, monospace; font-size: .92em; }
+    .eq { display: inline-block; margin-top: 26px; padding: 16px 22px; border: 1px solid var(--line); border-radius: 12px; background: #fff; color: var(--fg); font-size: 17px; line-height: 1.5; }
+    .eq .katex { font-size: 1.12em; }
+    .evidence { margin-top: 52px; }
+    .two-up { display: grid; grid-template-columns: 1fr; gap: 44px; margin-top: 52px; }
+
+    .results { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; margin-top: 58px; }
+    .results article { min-height: 220px; padding: 28px; border: 1px solid var(--line); border-radius: 18px; background: #fff; }
+    .results strong { display: block; font-size: clamp(48px, 6vw, 76px); font-weight: 390; letter-spacing: -.06em; line-height: 1; }
+    .results strong small { font-size: .42em; letter-spacing: -.02em; color: var(--faint); margin-left: 4px; }
+    .results p { max-width: 260px; margin: 42px 0 0; color: var(--muted); font-size: 14px; line-height: 1.5; }
+
+    figure.tbl { margin: 40px 0 0; }
+    figure.tbl figcaption { max-width: 900px; margin: 0 0 14px; color: var(--muted); font-size: 14px; line-height: 1.6; }
+    figure.tbl figcaption b { color: var(--fg); }
+    .table-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+    .ptable { width: 100%; min-width: 640px; border-collapse: collapse; font-size: 14px; line-height: 1.35; border-top: 1.5px solid var(--fg); border-bottom: 1.5px solid var(--fg); }
+    .ptable th, .ptable td { padding: 7px 8px; text-align: center; white-space: nowrap; }
+    .ptable thead th { font-weight: 600; color: var(--fg); border-bottom: 1px solid var(--fg); }
+    .ptable thead tr:first-child th[colspan] { border-bottom: 1px solid #b9b9b3; }
+    .ptable tbody th { font-weight: 500; text-align: left; color: var(--fg); }
+    .ptable tbody td:first-child, .ptable tbody th + td:not(.num) { text-align: left; }
+    .ptable td.num { font-variant-numeric: tabular-nums; }
+    .ptable td.num.b { font-weight: 700; }
+    .ptable td.num.u { text-decoration: underline; text-underline-offset: 2px; }
+    .ptable .rsp { background: #eaf0fb; }
+    .ptable .sd { margin-left: 2px; font-size: 10.5px; color: #8a8a84; }
+    .ptable tr.grp td { text-align: left; padding-top: 9px; color: var(--muted); border-bottom: 1px solid #d8d8d2; }
+    .ptable tr.group th, .ptable tr.group td, .ptable tr.sep th, .ptable tr.sep td { border-top: 1px solid #d8d8d2; }
+    .ptable tbody tr:first-child th, .ptable tbody tr:first-child td { border-top: 0; }
+    .ptable-narrow { min-width: 0; max-width: 760px; }
+
+    a.cite { margin-left: 2px; color: var(--link); font-size: .72em; vertical-align: super; text-decoration: none; }
+    a.cite:hover { text-decoration: underline; }
+    .refs { max-width: 900px; margin: 28px 0 0; padding: 0; list-style: none; color: var(--muted); font-size: 15.5px; line-height: 1.6; }
+    .refs li { padding-left: 34px; text-indent: -34px; }
+    .refs li + li { margin-top: 10px; }
+    .refs a { color: var(--link); }
+    .citation pre { margin: 48px 0 0; padding: 28px; border: 1px solid var(--line); border-radius: 18px; overflow-x: auto; background: #fff;
+      color: #2b2b28; font-family: "Geist Mono", ui-monospace, monospace; font-size: 13px; line-height: 1.65; }
+
+    .site-footer { display: flex; justify-content: space-between; gap: 30px; margin-top: 60px; padding: 40px 0 54px; border-top: 1px solid var(--line);
+      color: var(--faint); font-size: 13px; }
+    .site-footer a { color: var(--fg); }
+
+    .reveal { opacity: 0; transform: translateY(28px); transition: opacity 720ms cubic-bezier(.22,1,.36,1), transform 820ms cubic-bezier(.22,1,.36,1); }
+    .reveal.is-visible { opacity: 1; transform: none; }
+
+    @media (max-width: 760px) {
+      .shell { width: min(100% - 32px, 1180px); }
+      .top-nav { padding-top: 24px; }
+      .hero { padding: 48px 0 56px; }
+      .hero h1 { font-size: clamp(38px, 11vw, 56px); }
+      .tagline { font-size: 17px; }
+      .authors { margin-top: 30px; font-size: 14px; }
+      .authors .row { gap: 7px 16px; }
+      .summary { padding: 64px 0 56px; }
+      .section { padding: 80px 0; }
+      .two-up, .results { grid-template-columns: 1fr; }
+      .results p { margin-top: 30px; }
+      figure.fig img { border-radius: 12px; }
+      .ptable { font-size: 13px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .page > :not(.reveal):not(.site-footer) { animation: none; }
+      .reveal { opacity: 1; transform: none; transition: none; }
+    }
+  </style>
+</head>
+<body>
+<main class="page">
+  <nav class="top-nav shell" aria-label="Project navigation">
+    <a href="/projects.html">All projects
+      <svg class="link-arrow" viewBox="0 0 24 24" aria-hidden="true"><line class="link-arrow-shaft" x1="9" x2="18" y1="12" y2="12"/><path class="link-arrow-head" d="m14 8 4 4-4 4"/></svg>
+    </a>
+    <a href="/about.html">Heejun Kim</a>
+  </nav>
+
+  <section class="hero shell">
+    <p class="kicker">NeurIPS 2026</p>
+    <h1>From Noise to Diversity</h1>
+    <p class="tagline"><span>Random Embedding Injection</span> in LLM Reasoning</p>
+
+    <div class="authors" aria-label="Authors">
+      <div class="row">
+        <a href="https://heejunkim00.github.io/" target="_blank" rel="noreferrer">Heejun Kim<sup>1,*</sup></a>
+        <a href="https://github.com/iamseungpil" target="_blank" rel="noreferrer">Seungpil Lee<sup>1,*</sup></a>
+        <span>Jewon Yeom<sup>2</sup></span>
+        <span>Jaewon Sok<sup>2</sup></span>
+      </div>
+      <div class="row">
+        <span>Seonghyeon Park<sup>2</sup></span>
+        <span>Jeongjae Park<sup>2</sup></span>
+        <a href="https://www.snu-laal.com/" target="_blank" rel="noreferrer">Taesup Kim<sup>2,†</sup></a>
+        <a href="https://sundong.kim/" target="_blank" rel="noreferrer">Sundong Kim<sup>1,†</sup></a>
+      </div>
+    </div>
+    <div class="affiliations">
+      <p><sup>1</sup> Gwangju Institute of Science and Technology (GIST) · <sup>2</sup> Seoul National University</p>
+      <p>* Equal contribution · † Corresponding authors</p>
+    </div>
+
+    <div class="links" aria-label="Project resources">
+      <a href="https://arxiv.org/abs/2605.11936" target="_blank" rel="noreferrer"><span aria-hidden="true">📄</span> Paper</a>
+      <a href="https://github.com/heejunkim00/RSP" target="_blank" rel="noreferrer">
+        <svg class="icon" viewBox="0 0 16 16" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg>
+        Code</a>
+      <a class="ghost" href="#idea">Explore the idea ↓</a>
+    </div>
+  </section>
+
+  <figure class="fig teaser mech shell">
+    <div class="mech-frame">
+      <div id="rsp-mechanism" class="mech-canvas"></div>
+      <div id="rsp-mechanism-controls" class="mech-controls" aria-label="Animation controls"></div>
+    </div>
+    <figcaption>
+      (a) Attention from the token being generated. Attention on the RSP tokens is large at first and fades as generation proceeds
+      (measured on Qwen2.5-Math-7B). (b) The same prompt sampled 8 times: RSP paths branch early and converge. Temperature-only
+      paths stay close. Drag the timeline to scrub.
+    </figcaption>
+  </figure>
+
+  <p class="summary shell">
+    Append a few random vectors to the prompt. No training, no learned content.
+    The model explores more reasoning paths early and still commits to one answer.
+  </p>
+
+  <section class="section reveal shell" id="idea">
+    <h2>Random Soft Prompts</h2>
+    <div class="copy">
+      <p>
+        Soft-prompt methods improve reasoning by inserting trained vectors into the input, but whether the gain comes from the
+        <strong>learned content</strong> or from the <strong>act of injection</strong> has not been separated. We study the simplest
+        possible soft prompt: a Random Soft Prompt (RSP) drops the training step and appends a freshly drawn sequence of random
+        embedding vectors to the input.
+      </p>
+      <p>
+        Each vector is sampled from an isotropic Gaussian fitted to the entrywise mean and variance of the pretrained embedding
+        table, so it has the scale of a real token but no preferred direction. The sequence carries no learned content, yet it reaches
+        accuracy comparable to optimized soft prompts (TTSV<a class="cite" href="#ref-1">[1]</a>, SoftCoT<a class="cite" href="#ref-2">[2]</a>, LTPO<a class="cite" href="#ref-3">[3]</a>) on MATH-500, GSM8K, and AIME24.
+      </p>
+      <div class="eq" id="rsp-eq" data-tex="h_j \sim \mathcal{N}\!\left(\mu_E \mathbf{1},\; \sigma_E^{2} I\right),\quad j = 1,\dots,L, \qquad \text{input} = [\,X\,;\,H\,]">h<sub>j</sub> ~ N(μ<sub>E</sub>·1, σ<sub>E</sub><sup>2</sup>·I), j = 1 … L, input = [X ; H]</div>
+    </div>
+
+    <figure class="tbl">
+      <figcaption><b>Table 1.</b> Comparison with optimized soft prompt methods. Accuracy (%) under a unified evaluation, mean ± std over
+        five initialization seeds for RSP, TTSV<a class="cite" href="#ref-1">[1]</a>, SoftCoT<a class="cite" href="#ref-2">[2]</a>, and
+        LTPO<a class="cite" href="#ref-3">[3]</a>. The baseline uses greedy decoding and RSP uses suffix injection.
+        <b>Bold</b> and <u>underline</u> mark the highest and second-highest mean in each row.</figcaption>
+      <div class="table-scroll">
+      <table class="ptable">
+        <thead><tr><th>Model</th><th>Benchmark</th><th>Baseline</th><th class="rsp">RSP (suffix)</th><th>TTSV</th><th>SoftCoT</th><th>LTPO</th></tr></thead>
+        <tbody>
+          <tr class="group"><th scope="row" rowspan="3">Qwen2.5-Math-7B-Instruct</th><td>MATH-500</td><td class="num">83.20</td><td class="num b rsp">83.52<span class="sd">±0.56</span></td><td class="num u">83.44<span class="sd">±0.55</span></td><td class="num">82.88<span class="sd">±0.32</span></td><td class="num">82.64<span class="sd">±0.43</span></td></tr>
+          <tr><td>GSM8K</td><td class="num u">95.45</td><td class="num b rsp">95.60<span class="sd">±0.08</span></td><td class="num">95.12<span class="sd">±0.11</span></td><td class="num">94.74<span class="sd">±0.28</span></td><td class="num">94.97<span class="sd">±0.11</span></td></tr>
+          <tr><td>AIME24</td><td class="num">13.33</td><td class="num u rsp">16.67<span class="sd">±0.00</span></td><td class="num">15.32<span class="sd">±4.11</span></td><td class="num b">18.00<span class="sd">±2.67</span></td><td class="num">12.67<span class="sd">±1.33</span></td></tr>
+          <tr class="group"><th scope="row" rowspan="3">Qwen2.5-Math-1.5B-Instruct</th><td>MATH-500</td><td class="num">73.00</td><td class="num b rsp">74.12<span class="sd">±1.36</span></td><td class="num">72.32<span class="sd">±1.75</span></td><td class="num">72.88<span class="sd">±2.27</span></td><td class="num u">73.68<span class="sd">±0.97</span></td></tr>
+          <tr><td>GSM8K</td><td class="num b">85.29</td><td class="num u rsp">84.99<span class="sd">±0.22</span></td><td class="num">84.04<span class="sd">±1.07</span></td><td class="num">82.97<span class="sd">±2.97</span></td><td class="num">84.76<span class="sd">±0.52</span></td></tr>
+          <tr><td>AIME24</td><td class="num u">10.00</td><td class="num b rsp">13.33<span class="sd">±5.27</span></td><td class="num">6.02<span class="sd">±1.22</span></td><td class="num">9.33<span class="sd">±2.42</span></td><td class="num">9.33<span class="sd">±1.33</span></td></tr>
+        </tbody>
+      </table>
+      </div>
+    </figure>
+
+    <div class="copy">
+      <p>
+        The same holds across injection positions and model families. Where the baseline is already strong, suffix RSP matches it.
+        On the harder AIME24 it adds a few points. When a base model is evaluated with a chat template it was never trained on,
+        a random prompt recovers much of the lost accuracy.
+      </p>
+    </div>
+
+    <figure class="tbl">
+      <figcaption><b>Table 2.</b> Accuracy across model configurations and benchmarks. RSP accuracy (%) is mean ± std over five
+        initialization seeds, and the baseline uses greedy decoding. On AIME24, suffix RSP adds 3.3 pp at both Qwen2.5-Math-Instruct
+        scales. When a ChatML template is applied to a base model not trained for it, RSP recovers up to +27 pp (prefix, 1.5B) and
+        +17 pp (suffix, 7B) on MATH-500.</figcaption>
+      <div class="table-scroll">
+      <table class="ptable">
+        <thead>
+          <tr><th rowspan="2">Model</th><th colspan="3">MATH-500</th><th colspan="3">GSM8K</th><th colspan="3">AIME24</th></tr>
+          <tr><th>Baseline</th><th class="rsp">RSP (prefix)</th><th class="rsp">RSP (suffix)</th><th>Baseline</th><th class="rsp">RSP (prefix)</th><th class="rsp">RSP (suffix)</th><th>Baseline</th><th class="rsp">RSP (prefix)</th><th class="rsp">RSP (suffix)</th></tr>
+        </thead>
+        <tbody>
+          <tr class="grp"><td colspan="10"><em>Instruct models</em></td></tr>
+          <tr><th scope="row">LLaMA-3.1-8B-Instruct</th><td class="num">52.20</td><td class="num rsp">41.24<span class="sd">±2.16</span></td><td class="num rsp">49.52<span class="sd">±1.48</span></td><td class="num">85.75</td><td class="num rsp">76.30<span class="sd">±0.75</span></td><td class="num rsp">86.70<span class="sd">±0.39</span></td><td class="num">6.67</td><td class="num rsp">3.33<span class="sd">±2.36</span></td><td class="num rsp">6.67<span class="sd">±3.33</span></td></tr>
+          <tr><th scope="row">Qwen2.5-Math-7B-Instruct</th><td class="num">83.20</td><td class="num rsp">81.72<span class="sd">±0.46</span></td><td class="num rsp">83.52<span class="sd">±0.56</span></td><td class="num">95.45</td><td class="num rsp">94.92<span class="sd">±0.28</span></td><td class="num rsp">95.60<span class="sd">±0.08</span></td><td class="num">13.33</td><td class="num rsp">13.33<span class="sd">±2.36</span></td><td class="num rsp">16.67<span class="sd">±0.00</span></td></tr>
+          <tr><th scope="row">Qwen2.5-Math-1.5B-Instruct</th><td class="num">73.00</td><td class="num rsp">75.60<span class="sd">±0.51</span></td><td class="num rsp">74.12<span class="sd">±1.36</span></td><td class="num">85.29</td><td class="num rsp">85.26<span class="sd">±0.39</span></td><td class="num rsp">84.99<span class="sd">±0.22</span></td><td class="num">10.00</td><td class="num rsp">12.00<span class="sd">±1.83</span></td><td class="num rsp">13.33<span class="sd">±5.27</span></td></tr>
+          <tr class="grp"><td colspan="10"><em>Base models + ChatML (format mismatch)</em></td></tr>
+          <tr><th scope="row">Qwen2.5-Math-7B</th><td class="num">52.20</td><td class="num rsp">57.40<span class="sd">±1.71</span></td><td class="num rsp">69.40<span class="sd">±1.03</span></td><td class="num">58.30</td><td class="num rsp">56.25<span class="sd">±1.14</span></td><td class="num rsp">75.88<span class="sd">±0.36</span></td><td class="num">23.33</td><td class="num rsp">9.33<span class="sd">±4.35</span></td><td class="num rsp">20.00<span class="sd">±2.36</span></td></tr>
+          <tr><th scope="row">Qwen2.5-Math-1.5B</th><td class="num">34.40</td><td class="num rsp">61.56<span class="sd">±1.42</span></td><td class="num rsp">48.80<span class="sd">±2.09</span></td><td class="num">37.45</td><td class="num rsp">66.07<span class="sd">±1.03</span></td><td class="num rsp">50.24<span class="sd">±2.09</span></td><td class="num">13.33</td><td class="num rsp">14.67<span class="sd">±2.98</span></td><td class="num rsp">8.00<span class="sd">±5.06</span></td></tr>
+        </tbody>
+      </table>
+      </div>
+    </figure>
+  </section>
+
+  <section class="section reveal shell" id="probes">
+    <h2>Content or injection? Replace the trained vectors and see.</h2>
+    <div class="copy">
+      <p>
+        We keep each method's injection length and position fixed and only change <em>what</em> is injected. Replacing all trained
+        vectors with random draws does not consistently hurt. Shuffling token order or permuting coordinates inside each vector,
+        which destroys the learned structure but keeps the norms, does not hurt either. The channel is not inert: overtraining the
+        same vectors with a 1000× learning rate collapses accuracy.
+      </p>
+    </div>
+
+    <figure class="tbl">
+      <figcaption><b>Table 4.</b> Intervening on learned prompt content. Qwen2.5-Math-1.5B-Instruct, accuracy (%) as mean ± std over
+        three seeds. Injection length and position stay fixed within each method (20 prefix tokens for TTSV, 8 infix for LTPO,
+        4 infix for SoftCoT). <em>50% front / 50% random / 100% RSP</em> replace trained vectors with RSP draws, <em>Token-shuffle</em>
+        reorders the vectors, and <em>Dim-permute</em> permutes coordinates inside each vector. <b>Bold</b> marks the best mean in each column.</figcaption>
+      <div class="table-scroll">
+      <table class="ptable">
+        <thead>
+          <tr><th rowspan="2">Intervention</th><th colspan="3">TTSV<a class="cite" href="#ref-1">[1]</a></th><th colspan="3">LTPO<a class="cite" href="#ref-3">[3]</a></th><th colspan="3">SoftCoT<a class="cite" href="#ref-2">[2]</a></th></tr>
+          <tr><th>MATH-500</th><th>GSM8K</th><th>AIME24</th><th>MATH-500</th><th>GSM8K</th><th>AIME24</th><th>MATH-500</th><th>GSM8K</th><th>AIME24</th></tr>
+        </thead>
+        <tbody>
+          <tr><th scope="row">Trained</th><td class="num">72.33<span class="sd">±1.46</span></td><td class="num">84.08<span class="sd">±1.08</span></td><td class="num">6.67<span class="sd">±0.00</span></td><td class="num">74.07<span class="sd">±0.82</span></td><td class="num">84.69<span class="sd">±0.21</span></td><td class="num">7.78<span class="sd">±1.57</span></td><td class="num">72.87<span class="sd">±1.18</span></td><td class="num">84.84<span class="sd">±1.24</span></td><td class="num">8.89<span class="sd">±1.57</span></td></tr>
+          <tr class="sep"><th scope="row">50% front</th><td class="num b">75.40<span class="sd">±0.28</span></td><td class="num">84.99<span class="sd">±0.70</span></td><td class="num">10.00<span class="sd">±0.00</span></td><td class="num b">74.27<span class="sd">±0.47</span></td><td class="num">84.63<span class="sd">±0.34</span></td><td class="num">10.00<span class="sd">±2.72</span></td><td class="num">72.47<span class="sd">±0.98</span></td><td class="num">84.15<span class="sd">±1.29</span></td><td class="num">10.00<span class="sd">±2.72</span></td></tr>
+          <tr><th scope="row">50% random</th><td class="num">72.93<span class="sd">±1.95</span></td><td class="num">81.07<span class="sd">±3.54</span></td><td class="num b">12.22<span class="sd">±1.57</span></td><td class="num">73.87<span class="sd">±0.90</span></td><td class="num">84.91<span class="sd">±0.39</span></td><td class="num">8.89<span class="sd">±1.57</span></td><td class="num">73.33<span class="sd">±0.25</span></td><td class="num">84.53<span class="sd">±0.32</span></td><td class="num">12.22<span class="sd">±1.57</span></td></tr>
+          <tr><th scope="row">100% RSP</th><td class="num">75.13<span class="sd">±0.25</span></td><td class="num b">85.09<span class="sd">±0.44</span></td><td class="num">11.11<span class="sd">±1.57</span></td><td class="num">73.80<span class="sd">±0.91</span></td><td class="num b">85.06<span class="sd">±0.57</span></td><td class="num">11.11<span class="sd">±1.57</span></td><td class="num">73.67<span class="sd">±0.52</span></td><td class="num b">85.01<span class="sd">±0.19</span></td><td class="num">8.89<span class="sd">±1.57</span></td></tr>
+          <tr class="sep"><th scope="row">Token-shuffle</th><td class="num">72.40<span class="sd">±0.99</span></td><td class="num">83.83<span class="sd">±0.38</span></td><td class="num">6.67<span class="sd">±2.72</span></td><td class="num">73.60<span class="sd">±0.49</span></td><td class="num">84.61<span class="sd">±0.06</span></td><td class="num">7.78<span class="sd">±1.57</span></td><td class="num">72.80<span class="sd">±1.56</span></td><td class="num">84.96<span class="sd">±0.29</span></td><td class="num">11.11<span class="sd">±1.57</span></td></tr>
+          <tr><th scope="row">Dim-permute</th><td class="num">71.93<span class="sd">±0.57</span></td><td class="num">83.62<span class="sd">±0.55</span></td><td class="num">5.56<span class="sd">±1.57</span></td><td class="num">74.00<span class="sd">±0.43</span></td><td class="num">84.00<span class="sd">±0.77</span></td><td class="num b">12.22<span class="sd">±1.57</span></td><td class="num b">74.80<span class="sd">±0.16</span></td><td class="num">84.99<span class="sd">±0.16</span></td><td class="num b">13.33<span class="sd">±0.00</span></td></tr>
+        </tbody>
+      </table>
+      </div>
+    </figure>
+  </section>
+
+  <section class="section reveal shell" id="mechanism">
+    <h2>Branch early, anneal later.</h2>
+    <div class="copy">
+      <p>
+        RSP flattens the distribution over the first few generated tokens: entropy and varentropy go up, top-1 probability goes
+        down, and the curves return to the baseline within a few percent of the generation. Optimized soft prompts show the same
+        early pattern despite different training objectives.
+      </p>
+      <p>
+        The mechanism is attention mass. With a fixed number of RSP tokens and a growing KV cache, the share of attention on the
+        random positions shrinks as generation proceeds, so the perturbation that opened a new branch fades and the response
+        commits to a single completion.
+      </p>
+    </div>
+    <div class="two-up">
+      <figure class="fig">
+        <img src="/Image/projects/rsp/entropy.png" alt="Entropy, top-1 probability, and varentropy over the first 5% of generation for Baseline, RSP, LTPO, SoftCoT, and TTSV">
+        <figcaption>First 5% of generation, Qwen2.5-Math-1.5B-Instruct on MATH-500. RSP (orange) lifts early entropy and varentropy, then converges to the baseline.</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section class="section reveal shell" id="passn">
+    <h2>Diversity that turns into Pass@N.</h2>
+    <div class="copy">
+      <p>
+        Temperature rescales the same distribution and never changes the ranking of tokens. RSP reranks: the Spearman correlation
+        with the baseline first-token distribution is 0.71 instead of 1.0. Matching RSP's distributional shift with temperature
+        alone (τ = 3.0) drops accuracy to 1.4%, while RSP keeps 73.3%.
+      </p>
+      <p>
+        Drawing a fresh RSP for every sample and combining it with temperature sampling gives the highest Pass@N on both MATH-500
+        and AIME24. Sharing one RSP across samples gives no gain, so the benefit comes from varying the perturbation, not from
+        any single one.
+      </p>
+    </div>
+    <figure class="fig evidence">
+      <img src="/Image/projects/rsp/pass_at_n.png" alt="Pass@n curves on MATH-500 and AIME24 for Baseline, RSP single seed, RSP independent seed greedy, and RSP independent seed with temperature">
+      <figcaption>Pass@N with 16 samples per problem, Qwen2.5-Math-1.5B-Instruct. Independent RSPs with temperature (red) reach 92.8% on MATH-500 and 36.7% on AIME24 at N = 16.</figcaption>
+    </figure>
+    <div class="results">
+      <article><strong>+27.2<small>pp</small></strong><p>MATH-500 accuracy recovered on Qwen2.5-Math-1.5B when a mismatched chat template is used, with a 20-token prefix RSP.</p></article>
+      <article><strong>36.7<small>%</small></strong><p>Pass@16 on AIME24 with an independent RSP per sample, versus roughly 20% for temperature sampling alone.</p></article>
+      <article><strong>0.71</strong><p>Spearman correlation between RSP and baseline first-token rankings. Temperature keeps it at exactly 1.0.</p></article>
+    </div>
+  </section>
+
+  <section class="section reveal shell" id="sft">
+    <h2>Beyond inference: better training data.</h2>
+    <div class="copy">
+      <p>
+        If RSP finds correct solutions that plain sampling misses, it should help rejection-sampling fine-tuning. On 32,737 hard
+        problems that Qwen2.5-Math-7B-Instruct solves at most once in four clean rollouts, we draw eight rollouts per problem with
+        and without RSP, keep the correct ones, fine-tune the same model on each set, and evaluate without RSP.
+      </p>
+    </div>
+    <figure class="tbl">
+      <figcaption><b>Table 5.</b> Rejection-sampling SFT with RSP on Qwen2.5-Math-7B-Instruct. Coverage is the share of hard problems
+        with at least one correct rollout out of eight. The SFT average is over Minerva, GaoKao2023-EN, OlympiadBench, AIME24 and
+        AMC23 (Avg@32 for the last two), evaluated without RSP. Mean ± std over three collection seeds.</figcaption>
+      <div class="table-scroll">
+      <table class="ptable ptable-narrow">
+        <thead><tr><th>Collection</th><th>Problem coverage (%)</th><th>Rollout accuracy (%)</th><th>Accuracy after SFT, 5-benchmark avg. (%)</th></tr></thead>
+        <tbody>
+          <tr><th scope="row">No SFT</th><td class="num">–</td><td class="num">–</td><td class="num">40.26</td></tr>
+          <tr><th scope="row">Baseline sampling</th><td class="num">23.75<span class="sd">±0.10</span></td><td class="num">5.54<span class="sd">±0.03</span></td><td class="num">42.11<span class="sd">±0.54</span></td></tr>
+          <tr class="hl"><th scope="row">RSP</th><td class="num b rsp">49.68<span class="sd">±0.13</span></td><td class="num b rsp">17.45<span class="sd">±0.05</span></td><td class="num b rsp">43.77<span class="sd">±0.54</span></td></tr>
+        </tbody>
+      </table>
+      </div>
+    </figure>
+  </section>
+
+  <section class="section citation reveal shell" id="citation">
+    <h2>Citation</h2>
+    <pre><code>@inproceedings{kim2026rsp,
+  title     = {From Noise to Diversity: Random Embedding Injection in LLM Reasoning},
+  author    = {Kim, Heejun and Lee, Seungpil and Yeom, Jewon and Sok, Jaewon and
+               Park, Seonghyeon and Park, Jeongjae and Kim, Taesup and Kim, Sundong},
+  booktitle = {Advances in Neural Information Processing Systems},
+  year      = {2026},
+  url       = {https://arxiv.org/abs/2605.11936}
+}</code></pre>
+  </section>
+
+  <section class="section references reveal shell" id="references">
+    <h2>References</h2>
+    <ol class="refs">
+      <li id="ref-1">[1] Xinyue Kang, Diwei Shi, and Li Chen. Model Whisper: Steering vectors unlock large language models' potential in test-time.
+        In <em>AAAI</em>, 2026. <a href="https://arxiv.org/abs/2512.04748" target="_blank" rel="noreferrer">arXiv:2512.04748</a></li>
+      <li id="ref-2">[2] Yige Xu, Xu Guo, Zhiwei Zeng, and Chunyan Miao. SoftCoT: Soft chain-of-thought for efficient reasoning with LLMs.
+        In <em>ACL</em>, 2025. <a href="https://arxiv.org/abs/2502.12134" target="_blank" rel="noreferrer">arXiv:2502.12134</a></li>
+      <li id="ref-3">[3] Wengao Ye, Yan Liang, and Lianlei Shan. Thinking on the fly: Test-time reasoning enhancement via latent thought policy optimization.
+        In <em>ICLR</em>, 2026. <a href="https://arxiv.org/abs/2510.04182" target="_blank" rel="noreferrer">arXiv:2510.04182</a></li>
+    </ol>
+  </section>
+
+  <footer class="site-footer shell">
+    <p><a href="/about.html">Heejun Kim</a> · <a href="/projects.html">Projects</a></p>
+    <p>© 2026 Heejun Kim</p>
+  </footer>
+</main>
+<script src="/assets/js/rsp-mechanism.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" crossorigin="anonymous" defer
+  onload="var e=document.getElementById('rsp-eq'); if(e&&window.katex){katex.render(e.getAttribute('data-tex'), e, {throwOnError:false, displayMode:false});}"></script>
+<script>
+  (function () {
+    var sections = document.querySelectorAll('.reveal');
+    if (!('IntersectionObserver' in window)) { sections.forEach(function (s) { s.classList.add('is-visible'); }); return; }
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('is-visible'); io.unobserve(e.target); } });
+    }, { rootMargin: '0px 0px -10% 0px', threshold: 0.08 });
+    sections.forEach(function (s) { io.observe(s); });
+  })();
+</script>
+</body>
+</html>

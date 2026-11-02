@@ -1,0 +1,70 @@
+# Homepage Restore Instructions
+
+## Current State
+- Main homepage (index.html) is redirecting to About page (/about.html)
+- Original homepage content is backed up as index_backup.html
+
+## To Restore Original Homepage
+
+### Method 1: Using Command Line
+```bash
+cp index_backup.html index.html
+```
+
+### Method 2: Manual Replacement
+1. Delete the current index.html file
+2. Rename index_backup.html to index.html
+
+### Method 3: Edit index.html manually
+Replace the content of index.html with:
+```
+---
+# Feel free to add content and custom Front Matter to this file.
+# To modify the layout, see https://jekyllrb.com/docs/themes/#overriding-theme-defaults
+
+layout: home
+title: Home
+banner: "/assets/images/banners/background_pic.jpg"
+---
+```
+
+## Files Modified
+- index.html (redirects to about.html)
+- index_backup.html (contains original homepage)
+- _config.yml (navigation menu modified to show only About)
+
+## To Restore Navigation Menu
+In _config.yml, replace the header_pages section with:
+```
+# header_pages:
+#   - index.html
+#   - archives.html
+#   - categories.html
+#   - tags.html
+#   - about.md
+```
+(Comment out or remove the current header_pages section)
+
+## After Restoration
+- Homepage will show the original Jekyll theme homepage
+- About page will still be accessible at /about.html
+- All other pages (archives, categories, tags) will work as originally designed
+- Navigation menu will show all original links
+
+## Date Modified
+October 1, 2025
+
+## Jekyll Server Restart Required
+Since _config.yml was modified, you need to restart the Jekyll server:
+```bash
+# Stop current server (Ctrl+C)
+# Restart server
+bundle exec jekyll serve
+```
+
+## Notes
+- The redirect was implemented to temporarily make About page the main landing page
+- Navigation menu was modified to show only About page in header
+- No permanent changes were made to the Jekyll theme or configuration
+- All original functionality can be fully restored
+- Original navigation settings are preserved as comments in _config.yml

@@ -1,0 +1,34 @@
+---
+layout: minimal
+title: Projects
+description: Project pages for Heejun Kim's research. Each page gives the idea, the evidence, and links to the paper and code.
+---
+
+<section class="page-intro shell">
+  <h1>Projects</h1>
+  <p>Project pages for my research. Each page gives the idea, the evidence, and links to the paper and code.</p>
+</section>
+
+<section class="projects-section shell reveal">
+  <div class="proj-grid">
+    <a class="proj-card" href="/projects/RSP/">
+      <div class="visual"><img src="/Image/projects/rsp/card.png" alt="Random Soft Prompts overview"></div>
+      <div class="body">
+        <p class="meta"><span class="pill main">NeurIPS 2026</span></p>
+        <h3>From Noise to Diversity: Random Embedding Injection in LLM Reasoning</h3>
+        <p class="desc">Random Soft Prompts: training-free random vectors appended to the input make reasoning branch early, settle later, and widen Pass@N. Also improves rejection-sampling SFT.</p>
+        <span class="text-link">Project page <svg class="link-arrow" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><line class="link-arrow-shaft" x1="9" x2="18" y1="12" y2="12"/><path class="link-arrow-head" d="m14 8 4 4-4 4"/></svg></span>
+      </div>
+    </a>
+
+    <a class="proj-card" href="https://seal-kaist.github.io/projects/ResidualQuant" target="_blank" rel="noreferrer">
+      <div class="visual"><img src="/Image/projects/residualquant/card.png" alt="ResidualQuant accuracy and KV storage"></div>
+      <div class="body">
+        <p class="meta"><span class="pill">Preprint 2026</span><span class="pill">SEAL, KAIST</span></p>
+        <h3>ResidualQuant: KV Cache Quantization for Looped Transformers with 2-Bit Residuals</h3>
+        <p class="desc">Looped Transformers share weights but not KV caches. ResidualQuant stores one INT4 anchor loop and 2-bit residuals for the rest, recovering BF16 accuracy with 80.7% less KV storage.</p>
+        <span class="text-link">Project page (seal-kaist.github.io) <svg class="link-arrow" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><line class="link-arrow-shaft" x1="9" x2="18" y1="12" y2="12"/><path class="link-arrow-head" d="m14 8 4 4-4 4"/></svg></span>
+      </div>
+    </a>
+  </div>
+</section>
